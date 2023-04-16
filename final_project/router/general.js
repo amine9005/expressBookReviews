@@ -65,7 +65,7 @@ public_users.get('/isbn/:isbn', function (req, res) {
   
 // Get book details based on author
 
-public_users.get('/author/:author',async function (req, res) {
+public_users.get('/author/:author',function (req, res) {
   const author = req.params.author
   let book = null
 
@@ -74,6 +74,7 @@ public_users.get('/author/:author',async function (req, res) {
     for (let key in books) {
       if ( books[key]['author'] === author){
         book = books[key]
+        book['isbn'] = key
         const message = "Book with author named: "+author+" details"+JSON.stringify(book,null,4)
         resolve(message) 
       }
@@ -91,8 +92,6 @@ public_users.get('/author/:author',async function (req, res) {
 });
 
 
-
-
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   const title = req.params.title
@@ -102,6 +101,7 @@ public_users.get('/title/:title',function (req, res) {
     for (let key in books){
       if(books[key]['title'] === title){
         book = books[key]
+        book['isbn'] = key
         const message = "Book with title: "+title+" details "+JSON.stringify(book,null,4)
         resolve(message)
       }

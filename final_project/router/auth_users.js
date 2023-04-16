@@ -56,7 +56,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   if(book){
     const review = req.query.review;
     books[isbn]['reviews'][username] = review
-    return res.status(200).send("review has been successfully added/updated");
+    return res.status(200).send("review for book with ISBN: " +isbn+" has been successfully added/updated");
   }
   return res.status(404).send("Unable to find the requested book");
 });
